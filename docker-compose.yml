@@ -10,7 +10,7 @@ services:
     restart: unless-stopped
     ports:
       - "7080:80"
-      - "443:443"
+      - "7443:443"
     volumes:
       - ./web/wait-for-it.sh:/usr/local/bin/wait-for-it.sh:ro
       - /dev/urandom:/dev/random
