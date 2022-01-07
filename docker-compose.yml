@@ -9,7 +9,7 @@ services:
     image: misp:latest
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "7080:80"
       - "443:443"
     volumes:
       - ./web/wait-for-it.sh:/usr/local/bin/wait-for-it.sh:ro
