@@ -8,6 +8,7 @@ ENV https_proxy ${HTTPS_PROXY}
 ENV HTTP_PROXY=${HTTP_PROXY}
 ENV HTTPS_PROXY=${HTTPS_PROXY}
 RUN chmod +x /usr/local/bin/wait-for-it.sh
+ENTRYPOINT ["/usr/local/bin/wait-for-it.sh -t 0 -h db -p 3306 -- /run.sh"]
 RUN echo FOUSEKIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIS1
 
 #ADD libssl-dev libcurl4-openssl-dev for proxy support and correct TLS Handling
