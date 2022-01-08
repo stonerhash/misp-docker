@@ -8,6 +8,7 @@ ENV https_proxy ${HTTPS_PROXY}
 ENV HTTP_PROXY=${HTTP_PROXY}
 ENV HTTPS_PROXY=${HTTPS_PROXY}
 
+RUN echo FOUSEKIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIS1
 
 #ADD libssl-dev libcurl4-openssl-dev for proxy support and correct TLS Handling
 RUN apt-get update && \
@@ -27,7 +28,7 @@ RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 
 RUN useradd misp && usermod -aG sudo misp
-
+RUN echo FOUSEKIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIS2
 # Install script
 COPY --chown=misp:misp INSTALL_NODB.sh* ./
 RUN chmod +x INSTALL_NODB.sh
