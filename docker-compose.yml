@@ -12,7 +12,7 @@ services:
       - "7080:80"
       - "7443:443"
     volumes:
-      - ${DATA_DIR}/web/wait-for-it.sh:/usr/local/bin/wait-for-it.sh:ro
+      - ./web/wait-for-it.sh:/usr/local/bin/wait-for-it.sh:ro
       - /dev/urandom:/dev/random
       - ${DATA_DIR}/web:/var/www/MISP
     environment:
@@ -25,7 +25,7 @@ services:
       - MISP_BASEURL=${MISP_BASEURL}
       - POSTFIX_RELAY_HOST=${POSTFIX_RELAY_HOST}
       - TIMEZONE=${TIMEZONE}
-    entrypoint: "wait-for-it.sh -t 0 -h db -p 3306 -- /run.sh"
+    entrypoint: "/usr/local/bin/wait-for-it.sh -t 0 -h db -p 3306 -- /run.sh"
 
   db:
     container_name: misp_db
