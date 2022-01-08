@@ -3,6 +3,8 @@ FROM ubuntu:latest
 
 # Install core components
 ENV DEBIAN_FRONTEND noninteractive
+ENV http_proxy ${HTTPS_PROXY}
+ENV https_proxy ${HTTPS_PROXY}
 ENV HTTP_PROXY=${HTTP_PROXY}
 ENV HTTPS_PROXY=${HTTPS_PROXY}
 
