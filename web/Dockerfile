@@ -3,17 +3,22 @@ FROM ubuntu:latest
 
 # Install core components
 ENV DEBIAN_FRONTEND noninteractive
+ENV HTTP_PROXY=${HTTP_PROXY}
+ENV HTTPS_PROXY=${HTTPS_PROXY}
 
+
+#ADD libssl-dev libcurl4-openssl-dev for proxy support and correct TLS Handling
 RUN apt-get update && \
     apt-get dist-upgrade -y && apt-get upgrade && apt-get autoremove -y && apt-get clean && \
     apt-get install -y software-properties-common && \
     apt-get install -y postfix && \
     apt-get install -y mysql-client curl gcc git gnupg-agent \
-    make openssl redis-server sudo vim zip locales wget iproute2 supervisor cron
+    make openssl redis-server sudo vim zip locales wget iproute2 supervisor cron libssl-dev libcurl4-openssl-dev
 
 RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt-get update && apt-get -y install python3.9 python3-pip
-RUN pip3 install --upgrade pip
+#Added  --trusted-host pypi.org --trusted-host files.pythonhosted.org it might not be needed
+RUN pip3 install --upgrade pip  --trusted-host pypi.org --trusted-host files.pythonhosted.org
 
 
 RUN locale-gen en_US.UTF-8
@@ -33,7 +38,7 @@ RUN bash INSTALL_NODB.sh -A -u
 
 USER root
 
-RUN pip3 list -o | cut -f1 -d' ' | tr " " "\n" | awk '{if(NR>=3)print}' | cut -d' ' -f1 | xargs -n1 pip3 install -U ; exit 0 #Hack error code
+RUN pip3 list -o | cut -f1 -d' ' | tr " " "\n" | awk '{if(NR>=3)print}' | cut -d' ' -f1 | xargs -n1 pip3  --proxy=${HTTPS_PROXY} install -U ; exit 0 #Hack error code
 
 
 # Supervisord Setup
