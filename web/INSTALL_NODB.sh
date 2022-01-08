@@ -393,6 +393,7 @@ EOF
 }
 
 checkInstaller () {
+  return
   # Workaround: shasum is not available on RHEL, only checking sha512
   if [[ "${FLAVOUR}" == "rhel" ]] || [[ "${FLAVOUR}" == "centos" ]]; then
   INSTsum=$(sha512sum ${0} | cut -f1 -d\ )
